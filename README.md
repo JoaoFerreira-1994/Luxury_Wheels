@@ -1,3 +1,15 @@
+## Luxury Wheels
+
+Version: 0.9.0
+Status: Final testing and documentation
+Technology: Python 3, Flask, SQLite
+
+Luxury Wheels is a vehicle rental management system developed in Python as a final course project.
+
+The application provides a web interface for managing vehicles, clients, reservations, and payment methods. It also includes a REST API, user authentication, a dashboard, CSV exports, and application logging.
+
+
+
 ## Database Setup
 
 Before running the application for the first time, initialize the database:
