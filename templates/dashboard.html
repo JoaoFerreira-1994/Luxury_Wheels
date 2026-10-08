@@ -1,0 +1,169 @@
+{% include "includes/header.html" %}
+{% include "includes/navbar.html" %}
+
+    <div class="container mt-4">
+
+        <h1>Luxury Wheels</h1>
+
+        <p>Welcome, {{ user_name }}!</p>
+        <hr>
+        <h2>Dashboard</h2>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Monthly Reservations</h5>
+
+                        <p class="card-text">{{ monthly_summary.total_reservations }}</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Monthly Revenue</h5>
+
+                        <p class="card-text">€{{ monthly_summary.total_revenue }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mt-5">Rented Vehicles</h3>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Vehicle</th>
+                        <th>Client</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Remaining Days</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for vehicle in rented_vehicles %}
+                    <tr>
+                        <td>{{ vehicle.vehicle }}</td>
+                        <td>{{ vehicle.client }}</td>
+                        <td>{{ vehicle.start_date }}</td>
+                        <td>{{ vehicle.end_date }}</td>
+                        <td>{{ vehicle.remaining_days }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="mt-5">Latest Clients</h3>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Registration Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for client in latest_clients %}
+                    <tr>
+                        <td>{{ client.name }}</td>
+                        <td>{{ client.email }}</td>
+                        <td>{{ client.phone }}</td>
+                        <td>{{ client.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="mt-5">Available Vehicles by Category</h3>
+
+        <div class="row mt-3">
+            {% for category in available_vehicles %}
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ category.category }}</h5>
+
+                        <p class="card-text">Available: {{ category.total }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <h3 class="mt-5">Upcoming Revisions</h3>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Vehicle</th>
+                        <th>License Plate</th>
+                        <th>Next Revision</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for vehicle in upcoming_revisions %}
+                    <tr>
+                        <td>{{ vehicle.brand }} {{ vehicle.model }}</td>
+                        <td>{{ vehicle.license_plate }}</td>
+                        <td>{{ vehicle.next_revision_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="mt-5">Upcoming Inspections</h3>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Vehicle</th>
+                        <th>License Plate</th>
+                        <th>Next Inspection</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for vehicle in upcoming_inspections %}
+                    <tr>
+                        <td>{{ vehicle.brand }} {{ vehicle.model }}</td>
+                        <td>{{ vehicle.license_plate }}</td>
+                        <td>{{ vehicle.next_inspection_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if revision_alerts %}
+
+        <div class="alert alert-warning mt-4">
+            <h5>Revision Alert</h5>
+            {% for vehicle in revision_alerts %}
+                <p class="mb-1">
+                    {{ vehicle.brand }} {{ vehicle.model }}
+                    ({{ vehicle.license_plate }})
+                    has a revision scheduled for
+                    {{ vehicle.next_revision_date }}.
+                </p>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+{% include "includes/footer.html" %}

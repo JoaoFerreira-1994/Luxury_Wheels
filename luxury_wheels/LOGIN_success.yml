@@ -1,0 +1,22 @@
+info:
+  name: LOGIN_success
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://127.0.0.1:5000/login
+  body:
+    type: json
+    data: |-
+      {
+          "email": "admin@luxurywheels.com",
+          "password": "Luxury123"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

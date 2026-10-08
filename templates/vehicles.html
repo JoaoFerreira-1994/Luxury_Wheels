@@ -1,0 +1,80 @@
+{% include "includes/header.html" %}
+{% include "includes/navbar.html" %}
+
+
+    <div class="container mt-4">
+        <div class="row align-items-center mb-3">
+            <div class="col-6">
+                <h2 class="mb-0">Vehicles</h2>
+            </div>
+
+            <div class="col-6 d-flex justify-content-end gap-2">
+                <a href="/vehicles/add" class="btn btn-primary">
+                    Add Vehicle
+                </a>
+                <a href="{{ url_for('export_vehicles_csv') }}"
+                class="btn btn-success">
+                    Export CSV
+                </a>
+            </div>
+        </div>
+
+        {% if request.args.get("error") %}
+            <div class="alert alert-danger mt-3">
+                {{ request.args.get("error") }}
+            </div>
+        {% endif %}
+
+        <div class="table-responsive mt-4">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Vehicle</th>
+                        <th>License Plate</th>
+                        <th>Category</th>
+                        <th>Transmission</th>
+                        <th>Capacity</th>
+                        <th>Daily Price</th>
+                        <th>Status</th>
+                        <th>Actions<th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for vehicle in vehicles %}
+
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ vehicle.brand }} {{ vehicle.model }}</td>
+                        <td>{{ vehicle.license_plate }}</td>
+                        <td>{{ vehicle.category }}</td>
+                        <td>{{ vehicle.transmission }}</td>
+                        <td>{{ vehicle.capacity }}</td>
+                        <td>€{{ vehicle.daily_price }}</td>
+                        <td>{{ vehicle.status }}</td>
+                        <td>
+                            <a href="/vehicles/edit/{{ vehicle.id }}"
+                            class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
+
+                            <form method="POST"
+                                action="/vehicles/delete/{{ vehicle.id }}"
+                                class="d-inline">
+
+                                <button type="submit"
+                                        class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure you want to delete this vehicle?');">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% include "includes/footer.html" %}

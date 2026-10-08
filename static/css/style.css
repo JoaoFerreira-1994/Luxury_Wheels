@@ -1,0 +1,105 @@
+/* -------------------- GENERAL -------------------- */
+
+body {
+    background-color: #f4f6f8;
+    color: #1f2933;
+}
+
+
+/* -------------------- NAVBAR -------------------- */
+
+.navbar {
+    background-color: #183b4e !important;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.navbar .nav-link {
+    color: #ffffff !important;
+}
+
+.navbar .nav-link:hover {
+    color: #d6b84c !important;
+}
+
+.navbar-text {
+    color: #ffffff !important;
+}
+
+.navbar .nav-link.active {
+    color: #d6b84c !important;
+    font-weight: 600;
+}
+
+.navbar-logo {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+/* -------------------- TITLES -------------------- */
+
+h1,
+h2,
+h3 {
+    color: #183b4e;
+}
+
+
+/* -------------------- CARDS -------------------- */
+
+.card {
+    border: none;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+    background-color: #183b4e;
+    color: #ffffff;
+}
+
+
+/* -------------------- TABLES -------------------- */
+
+.table {
+    background-color: #ffffff;
+}
+
+.table thead th {
+    background-color: #183b4e;
+    color: #ffffff;
+}
+
+
+/* -------------------- BUTTONS -------------------- */
+
+.btn-primary {
+    background-color: #183b4e;
+    border-color: #183b4e;
+}
+
+.btn-primary:hover {
+    background-color: #102b3a;
+    border-color: #102b3a;
+}
+
+
+/* -------------------- FORMS -------------------- */
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #183b4e;
+    box-shadow: 0 0 0 0.2rem rgba(24, 59, 78, 0.15);
+}
+
+
+/* -------------------- FOOTER -------------------- */
+
+footer {
+    color: #6b7280;
+}

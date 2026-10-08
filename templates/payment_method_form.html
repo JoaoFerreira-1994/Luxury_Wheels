@@ -1,0 +1,51 @@
+
+{% include "includes/header.html" %}
+{% include "includes/navbar.html" %}
+
+<div class="container mt-4">
+
+    <h2>
+        {% if payment_method %}
+            Edit Payment Method
+        {% else %}
+            Add Payment Method
+        {% endif %}
+    </h2>
+
+    {% if error %}
+        <div class="alert alert-danger mt-3">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="POST" class="mt-4">
+
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+
+            <input
+                type="text"
+                name="name"
+                class="form-control"
+                value="{{ payment_method.name if payment_method else '' }}"
+                required
+            >
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            {% if payment_method %}
+                Update Payment Method
+            {% else %}
+                Save Payment Method
+            {% endif %}
+        </button>
+
+        <a href="/payment-methods-page" class="btn btn-secondary">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% include "includes/footer.html" %}

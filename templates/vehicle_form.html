@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% if vehicle %}
+            Luxury Wheels - Edit Vehicle
+        {% else %}
+            Luxury Wheels - Add Vehicle
+        {% endif %}
+    </title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/dashboard-page">
+                Luxury Wheels
+            </a>
+
+            <span class="navbar-text text-light">
+                {{ user_name }}
+            </span>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+
+        <h2>
+            {% if vehicle %}
+                Edit Vehicle
+            {% else %}
+                Add Vehicle
+            {% endif %}
+        </h2>
+
+        <form method="POST" class="mt-4">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Brand</label>
+                    <input type="text"
+                        name="brand"
+                        class="form-control"
+                        value="{{ vehicle.brand if vehicle else '' }}"
+                        required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Model</label>
+                    <input type="text"
+                        name="model"
+                        class="form-control"
+                        value="{{ vehicle.model if vehicle else '' }}"
+                        required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">License Plate</label>
+                    <input type="text"
+                        name="license_plate"
+                        class="form-control"
+                        value="{{ vehicle.license_plate if vehicle else '' }}"
+                        required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Category</label>
+                    <select name="category" class="form-select" required>
+                        <option value="Economy" {% if vehicle and vehicle.category == "Economy" %}selected{% endif %}>
+                            Economy
+                        </option>
+
+                        <option value="Standard" {% if vehicle and vehicle.category == "Standard" %}selected{% endif %}>
+                            Standard
+                        </option>
+
+                        <option value="Premium" {% if vehicle and vehicle.category == "Premium" %}selected{% endif %}>
+                            Premium
+                        </option>
+
+                        <option value="Luxury" {% if vehicle and vehicle.category == "Luxury" %}selected{% endif %}>
+                            Luxury
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Transmission</label>
+
+                    <select name="transmission"
+                            class="form-select"
+                            required>
+
+                        <option value="Automatic"
+                            {% if vehicle and vehicle.transmission == "Automatic" %}
+                                selected
+                            {% endif %}>
+                            Automatic
+                        </option>
+
+                        <option value="Manual"
+                            {% if vehicle and vehicle.transmission == "Manual" %}
+                                selected
+                            {% endif %}>
+                            Manual
+                        </option>
+
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Vehicle Type</label>
+
+                    <select name="vehicle_type" class="form-select" required>
+                        <option value="Sedan" {% if vehicle and vehicle.vehicle_type == "Sedan" %}selected{% endif %}>
+                            Sedan
+                        </option>
+
+                        <option value="Hatchback" {% if vehicle and vehicle.vehicle_type == "Hatchback" %}selected{% endif %}>
+                            Hatchback
+                        </option>
+
+                        <option value="SUV" {% if vehicle and vehicle.vehicle_type == "SUV" %}selected{% endif %}>
+                            SUV
+                        </option>
+
+                        <option value="Sports Car" {% if vehicle and vehicle.vehicle_type == "Sports Car" %}selected{% endif %}>
+                            Sports Car
+                        </option>
+
+                        <option value="Van" {% if vehicle and vehicle.vehicle_type == "Van" %}selected{% endif %}>
+                            Van
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Capacity</label>
+                    <input type="number"
+                        name="capacity"
+                        class="form-control"
+                        min="1"
+                        value="{{ vehicle.capacity if vehicle else '' }}"
+                        required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Daily Price</label>
+                    <input type="number"
+                        name="daily_price"
+                        class="form-control"
+                        min="0"
+                        step="0.01"
+                        value="{{ vehicle.daily_price if vehicle else '' }}"
+                        required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Image Path</label>
+                    <input type="text"
+                        name="image_path"
+                        class="form-control"
+                        value="{{ vehicle.image_path if vehicle and vehicle.image_path else '' }}">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Status</label>
+
+                    <select name="status"
+                            class="form-select"
+                            required>
+
+                        <option value="available"
+                            {% if vehicle and vehicle.status == "available" %}
+                                selected
+                            {% endif %}>
+                            Available
+                        </option>
+
+                        <option value="rented"
+                            {% if vehicle and vehicle.status == "rented" %}
+                                selected
+                            {% endif %}>
+                            Rented
+                        </option>
+
+                        <option value="maintenance"
+                            {% if vehicle and vehicle.status == "maintenance" %}
+                                selected
+                            {% endif %}>
+                            Maintenance
+                        </option>
+
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Last Revision Date</label>
+                    <input type="date"
+                        name="last_revision_date"
+                        class="form-control"
+                        value="{{ vehicle.last_revision_date if vehicle and vehicle.last_revision_date else '' }}">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Next Revision Date</label>
+                    <input type="date"
+                        name="next_revision_date"
+                        class="form-control"
+                        value="{{ vehicle.next_revision_date if vehicle and vehicle.next_revision_date else '' }}">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Last Inspection Date</label>
+                    <input type="date"
+                        name="last_inspection_date"
+                        class="form-control"
+                        value="{{ vehicle.last_inspection_date if vehicle and vehicle.last_inspection_date else '' }}">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Next Inspection Date</label>
+                    <input type="date"
+                        name="next_inspection_date"
+                        class="form-control"
+                        value="{{ vehicle.next_inspection_date if vehicle and vehicle.next_inspection_date else '' }}">
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Save Vehicle
+            </button>
+
+            <a href="/vehicles-page" class="btn btn-secondary">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

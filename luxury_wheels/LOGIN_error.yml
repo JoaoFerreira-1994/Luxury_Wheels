@@ -1,0 +1,22 @@
+info:
+  name: LOGIN_error
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: http://127.0.0.1:5000/login
+  body:
+    type: json
+    data: |-
+      {
+          "email": "admin@luxurywheels.com",
+          "password": "wrong"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
