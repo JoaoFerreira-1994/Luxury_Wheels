@@ -1,4 +1,5 @@
 import sqlite3
+from werkzeug.security import generate_password_hash
 
 DATABASE = "luxury_wheels.db"
 
@@ -94,6 +95,44 @@ def create_tables():
     print("Tables created successfully!")
 
 
+def create_admin():
+    
+    """Creates the default administrator if it does not exist."""
+
+    conn = connect()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT id FROM users WHERE email = ?",
+        ("admin@luxurywheels.com",)
+    )
+
+    admin = cursor.fetchone()
+
+    if not admin:
+
+        password_hash = generate_password_hash("Luxury123")
+
+        cursor.execute("""
+            INSERT INTO users (name, email, password, role)
+            VALUES (?, ?, ?, ?)
+        """, (
+            "Administrator",
+            "admin@luxurywheels.com",
+            password_hash,
+            "admin"
+        ))
+
+        conn.commit()
+
+        print("Default administrator created successfully!")
+
+    else:
+        print("Default administrator already exists.")
+
+    conn.close()
+
+
 def show_tables():
     """Displays all tables in the database."""
 
@@ -117,3 +156,4 @@ def show_tables():
 
 if __name__ == "__main__":
     create_tables()
+    create_admin()
