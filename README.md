@@ -1,7 +1,6 @@
 # Luxury Wheels
 
 **Version:** 1.0.0  
-**Status:** Final Release  
 **Technology:** Python 3, Flask, SQLite
 
 ## About the Project
